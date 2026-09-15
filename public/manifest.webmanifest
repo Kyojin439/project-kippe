@@ -1,0 +1,19 @@
+{
+  "name": "Kippe — Powered by Kippenstummel",
+  "short_name": "Kippe",
+  "description": "Unofficial community map prototype for cigarette vending machines.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#161310",
+  "theme_color": "#231e19",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

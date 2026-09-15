@@ -1,0 +1,124 @@
+[
+  {
+    "id": "v-eifel-1",
+    "machineId": "m-kiosk-eifel",
+    "voterId": "clean-sam",
+    "polarity": "down",
+    "reason": "wrong_location",
+    "note": "Walked the whole block. No machine, never was one here.",
+    "votedAt": "2026-09-13T20:15:00.000Z"
+  },
+  {
+    "id": "v-eifel-2",
+    "machineId": "m-kiosk-eifel",
+    "voterId": "mixed-jordan",
+    "polarity": "down",
+    "reason": "wrong_location",
+    "votedAt": "2026-09-14T07:40:00.000Z"
+  },
+  {
+    "id": "v-sued-1",
+    "machineId": "m-suedstadt",
+    "voterId": "clean-sam",
+    "polarity": "down",
+    "reason": "wrong_location",
+    "note": "Pin is a residential door.",
+    "votedAt": "2026-09-13T21:02:00.000Z"
+  },
+  {
+    "id": "v-rhein-1",
+    "machineId": "m-rheinauhafen",
+    "voterId": "demo-you",
+    "polarity": "down",
+    "reason": "wrong_location",
+    "votedAt": "2026-09-13T08:30:00.000Z"
+  },
+  {
+    "id": "v-neustadt-1",
+    "machineId": "m-neustadt",
+    "voterId": "clean-sam",
+    "polarity": "down",
+    "reason": "empty",
+    "votedAt": "2026-09-13T11:00:00.000Z"
+  },
+  {
+    "id": "v-deutz-1",
+    "machineId": "m-deutz",
+    "voterId": "flagged-alex",
+    "polarity": "down",
+    "reason": "empty",
+    "note": "Still there, just sold out tonight.",
+    "votedAt": "2026-08-20T21:10:00.000Z"
+  },
+  {
+    "id": "v-deutz-2",
+    "machineId": "m-deutz",
+    "voterId": "mixed-jordan",
+    "polarity": "up",
+    "votedAt": "2026-08-21T09:00:00.000Z"
+  },
+  {
+    "id": "v-nippes-1",
+    "machineId": "m-nippes",
+    "voterId": "mixed-jordan",
+    "polarity": "down",
+    "reason": "broken",
+    "votedAt": "2026-07-02T18:45:00.000Z"
+  },
+  {
+    "id": "v-ehrenfeld-1",
+    "machineId": "m-ehrenfeld",
+    "voterId": "flagged-alex",
+    "polarity": "down",
+    "reason": "empty",
+    "votedAt": "2026-06-15T19:00:00.000Z"
+  },
+  {
+    "id": "v-lindenthal-1",
+    "machineId": "m-lindenthal",
+    "voterId": "mixed-jordan",
+    "polarity": "down",
+    "reason": "broken",
+    "votedAt": "2026-05-01T12:00:00.000Z"
+  },
+  {
+    "id": "v-lindenthal-2",
+    "machineId": "m-lindenthal",
+    "voterId": "demo-you",
+    "polarity": "up",
+    "votedAt": "2026-05-02T08:00:00.000Z"
+  },
+  {
+    "id": "v-hbf-1",
+    "machineId": "m-hauptbahnhof",
+    "voterId": "mixed-jordan",
+    "polarity": "up",
+    "votedAt": "2026-04-01T10:00:00.000Z"
+  },
+  {
+    "id": "v-kalk-1",
+    "machineId": "m-kalk",
+    "voterId": "clean-sam",
+    "polarity": "down",
+    "reason": "wrong_location",
+    "note": "Off by about 80 metres — machine is around the corner.",
+    "votedAt": "2026-09-11T09:15:00.000Z"
+  },
+  {
+    "id": "v-mueng-1",
+    "machineId": "m-muengersdorf",
+    "voterId": "clean-sam",
+    "polarity": "down",
+    "reason": "empty",
+    "votedAt": "2026-08-01T22:00:00.000Z"
+  },
+  {
+    "id": "v-suelz-1",
+    "machineId": "m-suelz",
+    "voterId": "clean-sam",
+    "polarity": "down",
+    "reason": "other",
+    "note": "Machine is there, but the card reader eats cards. Not sure this should hit the creator.",
+    "votedAt": "2026-09-01T17:30:00.000Z"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "flagged-alex",
+    "displayName": "Alex-7f2a",
+    "identityHint": "Anonymous identity · high recent report rate"
+  },
+  {
+    "id": "clean-sam",
+    "displayName": "Sam-3a19",
+    "identityHint": "Anonymous identity · long-lived pins"
+  },
+  {
+    "id": "mixed-jordan",
+    "displayName": "Jordan-9c04",
+    "identityHint": "Anonymous identity · mixed reports"
+  },
+  {
+    "id": "demo-you",
+    "displayName": "You",
+    "identityHint": "Demo voter on this device"
+  }
+]
