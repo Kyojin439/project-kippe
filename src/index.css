@@ -111,6 +111,10 @@ body {
   height: 100%;
   min-height: 0;
 }
+.map-stage {
+  position: relative;
+  min-height: 0;
+}
 .map { height: 100%; width: 100%; background: #2a241e; }
 .pin span {
   display: block;
@@ -120,6 +124,51 @@ body {
   transform: rotate(-45deg);
   border: 2px solid #fff8ef;
   box-shadow: 0 2px 6px rgba(0,0,0,.4);
+}
+.you-pin {
+  position: relative;
+}
+.you-dot {
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 3px solid #fff8ef;
+  box-shadow: 0 0 0 1px rgba(20, 40, 80, 0.35), 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+.you-pulse {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.35);
+  animation: you-pulse 1.8s ease-out infinite;
+}
+@keyframes you-pulse {
+  0% { transform: scale(0.7); opacity: 0.9; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+.locate-btn {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 500;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: var(--panel);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.locate-hint {
+  margin: 0 0 10px;
 }
 
 .dock {
