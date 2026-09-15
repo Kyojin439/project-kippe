@@ -18,10 +18,19 @@ export function HelpPage() {
           </p>
         </details>
         <details>
-          <summary>Why is a location or rating not shown?</summary>
+          <summary>Why is there no ranking?</summary>
           <p>
-            Contributions may be checked before they appear. Validation protects
-            the map from accidental or misleading entries and can take time.
+            Public ranking stays off on purpose. There is no leaderboard here.
+            Machine ratings still exist so pins stay useful, but they are not
+            turned into a public rank list.
+          </p>
+        </details>
+        <details>
+          <summary>Why is a new pin or rating not showing yet?</summary>
+          <p>
+            New contributions may be checked before they appear. Validation
+            protects the map from accidental or misleading entries and can take
+            time.
           </p>
         </details>
         <details>

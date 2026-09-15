@@ -118,8 +118,8 @@ export function MapPage() {
         scrollWheelZoom
       >
         <TileLayer
-          attribution='&copy; OSM &copy; CARTO'
-          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Recenter lat={selected.lat} lng={selected.lng} />
         {machines.map((machine) => {
