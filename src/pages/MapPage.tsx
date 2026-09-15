@@ -1,12 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  Circle,
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMap,
-} from "react-leaflet";
+import { useEffect, useMemo, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import L from "leaflet";
 import { RateSheet } from "../components/RateSheet";
 import {
@@ -16,7 +9,6 @@ import {
   type Machine,
   type Vote,
 } from "../domain/karma";
-import { useGeolocation } from "../hooks/useGeolocation";
 import { useAppState } from "../state/store";
 
 function scoreColor(score: number): string {
@@ -36,26 +28,11 @@ function pinIcon(score: number) {
   });
 }
 
-const youIcon = L.divIcon({
-  className: "you-pin",
-  html: '<span class="you-pulse"></span><span class="you-dot"></span>',
-  iconSize: [28, 28],
-  iconAnchor: [14, 14],
-});
-
-function Recenter({
-  lat,
-  lng,
-  requestId,
-}: {
-  lat: number;
-  lng: number;
-  requestId: number;
-}) {
+function Recenter({ lat, lng }: { lat: number; lng: number }) {
   const map = useMap();
   useEffect(() => {
-    map.flyTo([lat, lng], Math.max(map.getZoom(), 14), { duration: 0.55 });
-  }, [lat, lng, requestId, map]);
+    map.setView([lat, lng]);
+  }, [lat, lng, map]);
   return null;
 }
 
@@ -101,9 +78,7 @@ function MachineCard({
         </div>
         <div>
           <dt>Creator</dt>
-          <dd>
-            {creatorName} · karma {creatorKarma}
-          </dd>
+          <dd>{creatorName} · karma {creatorKarma}</dd>
         </div>
       </dl>
       <button type="button" className="primary wide" onClick={onRate}>
@@ -113,27 +88,13 @@ function MachineCard({
   );
 }
 
-function locateLabel(status: ReturnType<typeof useGeolocation>["status"]) {
-  if (status === "locating") return "Finding you…";
-  if (status === "denied") return "Location blocked";
-  if (status === "unavailable") return "Location unavailable";
-  return "My location";
-}
-
 export function MapPage() {
   const { machines, votes, users, applyVote } = useAppState();
-  const { position: you, status: geoStatus, refresh } = useGeolocation();
   const [selectedId, setSelectedId] = useState<string | null>(
     machines[0]?.id ?? null,
   );
   const [rating, setRating] = useState(false);
   const [flash, setFlash] = useState<string | null>(null);
-  const [view, setView] = useState<{
-    lat: number;
-    lng: number;
-    requestId: number;
-  } | null>(null);
-  const autoCentered = useRef(false);
 
   const selected = machines.find((m) => m.id === selectedId) ?? machines[0];
   const selectedVotes = useMemo(
@@ -141,112 +102,50 @@ export function MapPage() {
     [votes, selected?.id],
   );
 
-  const goTo = (lat: number, lng: number) => {
-    setView((current) => ({
-      lat,
-      lng,
-      requestId: (current?.requestId ?? 0) + 1,
-    }));
-  };
-
-  useEffect(() => {
-    if (!you || autoCentered.current) return;
-    autoCentered.current = true;
-    goTo(you.lat, you.lng);
-  }, [you]);
-
   if (!selected) return <p>No machines in the demo set.</p>;
 
   const creator = users.find((u) => u.id === selected.creatorId);
   const creatorKarma = creator
     ? personalKarma(creator.id, machines, votes)
     : 0;
-  const accuracy = you
-    ? Math.max(24, Math.min(you.accuracy || 40, 140))
-    : 0;
 
   return (
     <div className="map-page">
-      <div className="map-stage">
-        <MapContainer
-          center={[selected.lat, selected.lng]}
-          zoom={13}
-          className="map"
-          scrollWheelZoom
-        >
-          <TileLayer
-            attribution="&copy; OSM &copy; CARTO"
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-          />
-          {view ? (
-            <Recenter lat={view.lat} lng={view.lng} requestId={view.requestId} />
-          ) : null}
-          {you ? (
-            <>
-              <Circle
-                center={[you.lat, you.lng]}
-                radius={accuracy}
-                pathOptions={{
-                  color: "#4c9dff",
-                  fillColor: "#4c9dff",
-                  fillOpacity: 0.16,
-                  weight: 1,
-                }}
-              />
-              <Marker
-                position={[you.lat, you.lng]}
-                icon={youIcon}
-                zIndexOffset={1000}
-              >
-                <Popup>You are here. Only you can see this pin.</Popup>
-              </Marker>
-            </>
-          ) : null}
-          {machines.map((machine) => {
-            const score = machineScore(
-              votes.filter((v) => v.machineId === machine.id),
-            );
-            return (
-              <Marker
-                key={machine.id}
-                position={[machine.lat, machine.lng]}
-                icon={pinIcon(score)}
-                eventHandlers={{
-                  click: () => {
-                    setSelectedId(machine.id);
-                    setRating(false);
-                    setFlash(null);
-                    goTo(machine.lat, machine.lng);
-                  },
-                }}
-              >
-                <Popup>{machine.name}</Popup>
-              </Marker>
-            );
-          })}
-        </MapContainer>
-        <button
-          type="button"
-          className="locate-btn"
-          onClick={() => {
-            if (you) {
-              goTo(you.lat, you.lng);
-              return;
-            }
-            refresh();
-          }}
-        >
-          {locateLabel(geoStatus)}
-        </button>
-      </div>
+      <MapContainer
+        center={[selected.lat, selected.lng]}
+        zoom={13}
+        className="map"
+        scrollWheelZoom
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Recenter lat={selected.lat} lng={selected.lng} />
+        {machines.map((machine) => {
+          const score = machineScore(
+            votes.filter((v) => v.machineId === machine.id),
+          );
+          return (
+            <Marker
+              key={machine.id}
+              position={[machine.lat, machine.lng]}
+              icon={pinIcon(score)}
+              eventHandlers={{
+                click: () => {
+                  setSelectedId(machine.id);
+                  setRating(false);
+                  setFlash(null);
+                },
+              }}
+            >
+              <Popup>{machine.name}</Popup>
+            </Marker>
+          );
+        })}
+      </MapContainer>
 
       <section className="dock">
-        {geoStatus === "denied" ? (
-          <p className="muted locate-hint">
-            Your own position is not on the map yet. Allow location on this
-            device — nobody else can see it.
-          </p>
-        ) : null}
         {flash ? <p className="flash">{flash}</p> : null}
         {rating ? (
           <RateSheet

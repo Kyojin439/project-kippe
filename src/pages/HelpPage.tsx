@@ -18,14 +18,6 @@ export function HelpPage() {
           </p>
         </details>
         <details>
-          <summary>Is my location on the map?</summary>
-          <p>
-            Yes. The map shows your own position so nearby machines make sense.
-            Only you can see it. Other people never appear on your map, and this
-            prototype does not send your coordinates anywhere.
-          </p>
-        </details>
-        <details>
           <summary>Why is there no ranking?</summary>
           <p>
             Public ranking stays off on purpose. There is no leaderboard here.
